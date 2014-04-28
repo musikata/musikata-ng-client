@@ -1,0 +1,24 @@
+{
+  "name": "musikata-ng-client",
+  "version": "0.0.0",
+  "description": "musikata-ng-client ==================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/musikata/musikata-ng-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/musikata/musikata-ng-client/issues"
+  },
+  "homepage": "https://github.com/musikata/musikata-ng-client",
+  "devDependencies": {
+    "karma": "~0.12.14",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-growl-reporter": "~0.1.1"
+  }
+}
