@@ -7,6 +7,9 @@ describe('PathsController', function(){
   var MockPathRepository = {
     getPath: function(pathId){
       console.log('getPath');
+    },
+    getPathNode: function(pathId, nodeXPath){
+      console.log('getPathNode');
     }
   };
 
@@ -41,10 +44,18 @@ describe('PathsController', function(){
     });
   });
 
-  it('should get expected path from path repository', function(){
+  it('should get path from path repository', function(){
     spyOn(MockPathRepository, 'getPath');
     $routeParams.pathId = 'testPath';
     var controller = generateController();
     expect(MockPathRepository.getPath).toHaveBeenCalledWith('testPath');
+  });
+
+  it('should get path node from path repository', function(){
+    spyOn(MockPathRepository, 'getPathNode');
+    $routeParams.pathId = 'testPath';
+    $routeParams.nodeXPath = 'A/A.A';
+    var controller = generateController();
+    expect(MockPathRepository.getPathNode).toHaveBeenCalledWith($routeParams.pathId, $routeParams.nodeXPath);
   });
 });

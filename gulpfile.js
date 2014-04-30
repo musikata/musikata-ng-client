@@ -3,7 +3,10 @@ var plugins = require("gulp-load-plugins")({lazy:false});
 
 var paths = {
   'app:js': [
-    '!./app/**/*_test.js', 
+    '!./app/**/*_test.js',
+    // order matters, load app & modules first.
+    './app/app.js',
+    './app/**/*-module.js',
     './app/**/*.js'
   ],
 
@@ -15,8 +18,8 @@ var paths = {
   ],
 
   'vendor:js': [
-    '!./bower_components/**/*.min.js',
-    './bower_components/**/*.js'
+    './bower_components/angular/angular.js',
+    './bower_components/angular-ui-router/release/angular-ui-router.js'
   ]
 };
 
@@ -36,7 +39,9 @@ gulp.task('app:templates', function(){
 });
 
 gulp.task('app:index', function() {
+  console.log('indexo');
   gulp.src(paths['app:index'])    
+  .pipe(plugins.inject(gulp.src(paths['app:js'], {read: false})))
   .pipe(gulp.dest('./build'));
 });
 
@@ -52,19 +57,14 @@ gulp.task('watch',function(){
     'build/**/*.html',        
     'build/**/*.js',
     'build/**/*.css'        
-    ], function(event) {
+    ].concat(paths['app:js']), function(event) {
       return gulp.src(event.path)
       .pipe(plugins.connect.reload());
     });
-    gulp.watch(paths['app:js'],['app:js']);
+    //gulp.watch(paths['app:js'],['app:js']);
     gulp.watch(paths['app:templates'],['app:templates']);
     gulp.watch(paths['app:index'],['app:index']);
-
 });
-
-  port: 9000,
-  livereload: true
-}));
 
 gulp.task('build', [
   'app:js',
@@ -73,8 +73,17 @@ gulp.task('build', [
   'app:index',
 ]);
 
-gulp.task('watch', [
+gulp.task('connect', function(){
+  plugins.connect.server({
+    root: ['./'],
+    port: 9000,
+    livereload: true
+  })
+});
+
+gulp.task('serve', [
   'build',
   'connect',
   'watch'
 ]);
+

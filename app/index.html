@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>musikata</title>    
+  </head>
+  <body ng-app="musikata">
+
+    
+    <div ui-view></div>
+    <!-- We'll also add some navigation: -->
+    <a ui-sref="state1">State 1</a>
+    <a ui-sref="state2">State 2</a>
+
+    I can add: {{ 1 + 2 }}.
+
+    <script src="../build/lib.js"></script>
+    <!-- inject:js -->
+    <!-- endinject -->
+    <!--
+    <script src="app.js"></script>
+    -->
+  </body>
+</html>
