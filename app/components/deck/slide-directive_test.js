@@ -1,14 +1,14 @@
-describe('deck', function() {
+describe('slide directive', function() {
   var elm, $scope;
 
-  var generateDeck = function(opts){
+  var generateSlide = function(opts){
     inject(function($rootScope, $compile){
       opts = opts || {};
       var scope = opts.scope || {};
       elm = angular.element(
-        '<div>' +
-          '<deck></deck>' +
-        '</div>');
+        '<deck>' +
+          '<slide></slide>' +
+        '</deck>');
 
       $scope = $rootScope.$new();
       angular.extend($scope, scope);
@@ -20,10 +20,10 @@ describe('deck', function() {
   // load the deck module
   beforeEach(module('deck'));
 
-  it('should create deck', function(){
-    generateDeck();
-    var deck = elm.find('deck');
-    expect(deck.length).toBe(1);
+  it('should create slide', function(){
+    generateSlide();
+    var slide= elm.find('slide');
+    expect(slide.length).toBe(1);
   });
 
 });
